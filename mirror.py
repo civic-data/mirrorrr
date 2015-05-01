@@ -228,6 +228,7 @@ class MirrorHandler(BaseHandler):
     if not DEBUG:
       self.response.headers["cache-control"] = \
         "max-age=%d" % EXPIRATION_DELTA_SECONDS
+    self.response.headers.add_header("Access-Control-Allow-Origin", "*")
 
     self.response.out.write(content.data)
 
