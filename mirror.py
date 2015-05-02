@@ -106,7 +106,7 @@ class MirroredContent(object):
     """
     logging.debug("Fetching '%s'", mirrored_url)
     try:
-      response = urlfetch.fetch(mirrored_url)
+      response = urlfetch.fetch(mirrored_url,deadline=60)
     except (urlfetch.Error, apiproxy_errors.Error):
       logging.exception("Could not fetch URL")
       return None
