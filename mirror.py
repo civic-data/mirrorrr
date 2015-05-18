@@ -64,7 +64,7 @@ TRANSFORMED_CONTENT_TYPES = frozenset([
   "text/css",
 ])
 
-MAX_CONTENT_SIZE = 10 ** 6
+MAX_CONTENT_SIZE = 10 ** 6 -1000
 
 ###############################################################################
 
