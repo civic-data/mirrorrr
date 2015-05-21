@@ -132,7 +132,10 @@ class MirroredContent(object):
       logging.warning("Content is over 1MB; truncating")
       #content = content[:MAX_CONTENT_SIZE]
       #content = '"TOO LARGE"'
-      content = 'callback1({"response":{"metadata":{"totalresults":"1"},"results":[]}});'
+
+      #content = 'callback1({"response":{"metadata":{"totalresults":"1"},"results":[]}});'
+      #  pick some large number in case this is the first request. :)
+      content = 'callback1({"response":{"metadata":{"totalresults":"111375"},"results":[]}});'
 
 
     new_content = MirroredContent(
