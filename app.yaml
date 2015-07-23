@@ -1,5 +1,6 @@
 application: origin-proxy
-version: first
+# version: first
+version: 2-jsonp-to-json
 module: default
 runtime: python27
 api_version: 1

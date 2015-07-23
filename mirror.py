@@ -65,7 +65,7 @@ TRANSFORMED_CONTENT_TYPES = frozenset([
 ])
 
 # MAX_CONTENT_SIZE = 10 ** 6 -1000
-MAX_CONTENT_SIZE =  10000
+MAX_CONTENT_SIZE =  100000
 
 ###############################################################################
 
@@ -91,7 +91,7 @@ class MirroredContent(object):
     return memcache.get(key_name)
 
   @staticmethod
-  def fetch_and_store(key_name, base_url, translated_address, mirrored_url):
+  def fetch_and_store(key_name, base_url, translated_address, mirrored_url,request):
     """Fetch and cache a page.
 
     Args:
@@ -126,6 +126,15 @@ class MirroredContent(object):
         content = transform_content.TransformContent(base_url, mirrored_url,
                                                      content)
         break
+
+    # If the request is jsonp, try to convert to json
+    callback = request.get('callback')
+    if callback:
+      #content = re.sub(r"\);$","", content.replace('%s(' % callback,'',1), flags=re.UNICODE)
+      #content = content.replace('%s(' % callback,'',1)[:-2]
+      content = content[len(callback)+1:-2]
+
+    logging.debug('QQQ content len: %s', len(content))
 
     # If the transformed content is over 1MB, truncate it (yikes!)
     if len(content) > MAX_CONTENT_SIZE:
@@ -210,7 +219,7 @@ class MirrorHandler(BaseHandler):
     logging.debug('User-Agent = "%s", Referrer = "%s"',
                   self.request.user_agent,
                   self.request.referer)
-    logging.debug('Base_url = "%s", url = "%s"', base_url, self.request.url)
+    logging.debug('QQQ: type base_url: %s, type request: %s, Base_url = "%s", url = "%s"', type(base_url), type(self.request), base_url, self.request.url)
 
     translated_address = self.get_relative_url()[1:]  # remove leading /
     mirrored_url = HTTP_PREFIX + translated_address
@@ -227,7 +236,8 @@ class MirrorHandler(BaseHandler):
       cache_miss = True
       content = MirroredContent.fetch_and_store(key_name, base_url,
                                                 translated_address,
-                                                mirrored_url)
+                                                mirrored_url,
+                                                self.request)
     if content is None:
       return self.error(404)
 
