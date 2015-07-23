@@ -138,7 +138,7 @@ class MirroredContent(object):
 
     # If the transformed content is over 1MB, truncate it (yikes!)
     if len(content) > MAX_CONTENT_SIZE:
-      logging.warning("Content is over 1MB; truncating")
+      logging.warning("Content is over %s; truncating", MAX_CONTENT_SIZE)
       #content = content[:MAX_CONTENT_SIZE]
       #content = '"TOO LARGE"'
 
