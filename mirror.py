@@ -145,7 +145,8 @@ class MirroredContent(object):
       #content = 'callback1({"response":{"metadata":{"totalresults":"1"},"results":[]}});'
       #  pick some large number in case this is the first request. :)
       # content = 'callback1({"response":{"metadata":{"totalresults":"111375"},"results":[]}});'
-      content = 'callback1({"response":{"metadata":{"totalresults":"999999"},"results":[]}});'
+      # content = 'callback1({"response":{"metadata":{"totalresults":"999999"},"results":[]}});'
+      content = '{"response":{"metadata":{"totalresults":"999999"},"results":[]}};'
 
 
     new_content = MirroredContent(
