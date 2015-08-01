@@ -64,8 +64,8 @@ TRANSFORMED_CONTENT_TYPES = frozenset([
   "text/css",
 ])
 
-# MAX_CONTENT_SIZE = 10 ** 6 -1000
-MAX_CONTENT_SIZE =  100000
+MAX_CONTENT_SIZE = 10 ** 6 -1000
+# MAX_CONTENT_SIZE =  100000
 
 ###############################################################################
 
@@ -146,7 +146,7 @@ class MirroredContent(object):
       #  pick some large number in case this is the first request. :)
       # content = 'callback1({"response":{"metadata":{"totalresults":"111375"},"results":[]}});'
       # content = 'callback1({"response":{"metadata":{"totalresults":"999999"},"results":[]}});'
-      content = '{"response":{"metadata":{"totalresults":"999999"},"results":[]}}'
+      content = '{"response":{"metadata":{"totalresults":"99"},"results":[]}}'
 
 
     new_content = MirroredContent(
